@@ -47,7 +47,7 @@ public class R
         return r;
     }
 
-    public R sucess(Boolean success)
+    public R success(Boolean success)
     {
         this.setSuccess(success);
         return this;
@@ -56,6 +56,12 @@ public class R
     public R code(Integer code)
     {
         this.setCode(code);
+        return this;
+    }
+
+    public R message(String message)
+    {
+        this.setMessage(message);
         return this;
     }
 

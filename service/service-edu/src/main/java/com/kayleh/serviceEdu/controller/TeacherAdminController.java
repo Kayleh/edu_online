@@ -52,7 +52,7 @@ public class TeacherAdminController
     )
     {
         Page<EduTeacher> pageParam = new Page<>(page, limit);
-        teacherService.page(pageParam, null);
+        teacherService.pageQuery(pageParam, null);
         List<EduTeacher> teacherList = pageParam.getRecords();
         long total = pageParam.getTotal();
         return R.ok().data("total", total).data("row", teacherList);
@@ -65,6 +65,31 @@ public class TeacherAdminController
             @RequestBody EduTeacher teacher)
     {
         teacherService.save(teacher);
+        return R.ok();
+    }
+
+    @ApiOperation(value = "根据id查询讲师")
+    @GetMapping("{id}")
+    public R getById(
+            @ApiParam(name = "id", value = "讲师id", required = true)
+            @PathVariable String id)
+    {
+        EduTeacher teacher = teacherService.getById(id);
+        return R.ok().data("item", teacher);
+    }
+
+    @ApiOperation(value = "根据id修改讲师")
+    @PostMapping("{id}")
+    public R updateById(
+            @ApiParam(name = "id", value = "讲师id", required = true)
+            @PathVariable String id,
+
+            @ApiParam(name = "teacher", value = "讲师对象", required = true)
+            @RequestBody EduTeacher teacher
+    )
+    {
+        teacher.setId(id);
+        teacherService.updateById(teacher);
         return R.ok();
     }
 
