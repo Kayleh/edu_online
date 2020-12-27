@@ -1,7 +1,7 @@
 package com.kayleh.serviceEdu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kayleh.commonutils.R;
+import com.kayleh.commonutils.result.R;
 import com.kayleh.serviceEdu.entity.EduTeacher;
 import com.kayleh.serviceEdu.service.EduTeacherService;
 import io.swagger.annotations.Api;

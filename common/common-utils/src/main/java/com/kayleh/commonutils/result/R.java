@@ -1,4 +1,4 @@
-package com.kayleh.commonutils;
+package com.kayleh.commonutils.result;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package com.kayleh.serviceBase.exception;
 
-import com.kayleh.commonutils.R;
+import com.kayleh.commonutils.result.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,13 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Date: 2020/12/28 0:17
  */
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler
 {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public R error(Exception e)
     {
-        e.printStackTrace();
+        log.error(e.getMessage());
+//        log.error(ExceptionUtil.getMessage(e)); 输出到文件
         return R.error();
     }
 
