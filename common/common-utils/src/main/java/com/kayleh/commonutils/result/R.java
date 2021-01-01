@@ -1,15 +1,13 @@
 package com.kayleh.commonutils.result;
 
+import com.kayleh.commonutils.result.ResultCodeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @Author: Kayleh
- * @Date: 2020/12/27 20:54
- */
+//统一返回结果的类
 @Data
 public class R
 {
@@ -25,25 +23,38 @@ public class R
     @ApiModelProperty(value = "返回数据")
     private Map<String, Object> data = new HashMap<String, Object>();
 
+    //把构造方法私有
     private R()
     {
     }
 
-    public static R ok()
+    //成功静态方法
+    public static R success()
     {
         R r = new R();
-        r.setSuccess(true);
-        r.setCode(ResultCode.SUCCESS);
-        r.setMessage("成功");
+        r.setSuccess(ResultCodeEnum.SUCCESS.getSuccess());
+        r.setCode(ResultCodeEnum.SUCCESS.getCode());
+        r.setMessage(ResultCodeEnum.SUCCESS.getMessage());
         return r;
     }
 
+    //失败静态方法
     public static R error()
     {
         R r = new R();
-        r.setSuccess(false);
-        r.setCode(ResultCode.ERROR);
-        r.setMessage("失败");
+        r.setSuccess(ResultCodeEnum.UNKNOWN_REASON.getSuccess());
+        r.setCode(ResultCodeEnum.UNKNOWN_REASON.getCode());
+        r.setMessage(ResultCodeEnum.UNKNOWN_REASON.getMessage());
+        return r;
+    }
+
+    //设定结果
+    public static R setResult(ResultCodeEnum resultCodeEnum)
+    {
+        R r = new R();
+        r.setSuccess(resultCodeEnum.getSuccess());
+        r.setCode(resultCodeEnum.getCode());
+        r.setMessage(resultCodeEnum.getMessage());
         return r;
     }
 
@@ -53,15 +64,15 @@ public class R
         return this;
     }
 
-    public R code(Integer code)
-    {
-        this.setCode(code);
-        return this;
-    }
-
     public R message(String message)
     {
         this.setMessage(message);
+        return this;
+    }
+
+    public R code(Integer code)
+    {
+        this.setCode(code);
         return this;
     }
 
